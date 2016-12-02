@@ -1,0 +1,21 @@
+{
+    "name": "bright-tech/laravel-aliyunoss-video-service",
+    "description": "阿里云视频转码 laravel ",
+    "type": "sdk",
+    "keywords": ["aliyun","mts","sdk","php","laravel"],
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "dudashuang",
+            "email": "wang.wenchao@bright-tech.cn"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*",
+        "bright-tech/aliyun-oss-sdk-php": "*"
+    },
+    "autoload": {
+        "psr-4": {"Mts\\": "src/Mts"}
+    }
+}
