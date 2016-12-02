@@ -1,4 +1,7 @@
 <?php
+use Mts\Core\ProductDomain;
+use Mts\Core\Endpoint;
+use Mts\Core\EndpointProvider;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file

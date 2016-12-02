@@ -16,6 +16,6 @@
         "bright-tech/aliyun-oss-sdk-php": "*"
     },
     "autoload": {
-        "psr-4": {"Mts\\": "src/Mts"}
+        "psr-4": {"Mts\\": "src/"}
     }
 }

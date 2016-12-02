@@ -19,7 +19,9 @@
  */
 namespace Mts\Request\V20140618;
 
-class QueryJobListRequest extends \RpcAcsRequest
+use Mts\Core\RpcAcsRequest;
+
+class QueryJobListRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{

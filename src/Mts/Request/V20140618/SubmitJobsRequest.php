@@ -19,7 +19,9 @@
  */
 namespace Mts\Request\V20140618;
 
-class SubmitJobsRequest extends \RpcAcsRequest
+use Mts\Core\RpcAcsRequest;
+
+class SubmitJobsRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,7 +20,9 @@
  */
 namespace Mts\Request\V20140618;
 
-class SubmitAnalysisJobRequest extends \RpcAcsRequest
+use Mts\Core\RpcAcsRequest;
+
+class SubmitAnalysisJobRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{

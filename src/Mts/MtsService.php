@@ -1,7 +1,7 @@
 <?php
 namespace Mts;
 
-
+include_once '/Core/Config.php';
 use OSS\OssClient;
 use Mts\Request\V20140618 as Mts;
 use Mts\Core as Core;
@@ -107,15 +107,15 @@ class MtsService
 
     public function __construct()
     {
-        $this->mts_region = 'cn-shanghai';
-        $this->oss_region = 'oss-cn-shanghai';
-        $this->mts_endpoint = 'http://mts.cn-shanghai.aliyuncs.com';
+        $this->mts_region = env('ALIYUN_MTS_REGION', 'cn-shanghai');
+        $this->oss_region = env('ALIYUN_OSS_REGION','oss-cn-shanghai');
+        $this->mts_endpoint = env('ALIYUN_MTS_ENDPOINT', 'http://mts.cn-shanghai.aliyuncs.com');
         $this->oss_endpoint = env('ALIYUN_OSS_ENDPOINT','oss-cn-shanghai.aliyuncs.com');
         $this->access_key_id = env('ALIYUN_OSS_ACCESS_ID');
         $this->access_key_secret = env('ALIYUN_OSS_ACCESS_KEY');
-        $this->transcode_template_id = '';
-        $this->pipeline_id = '3500393f3f5b4a9c99ee078d550eed90';
-        $this->watermark_template_id = '';
+        $this->transcode_template_id = env('ALIYUN_MTS_TRANSCODE_TEMPLATE_ID', '');
+        $this->pipeline_id = env('ALIYUN_MTS_PIPELINE_ID', '3500393f3f5b4a9c99ee078d550eed90');
+        $this->watermark_template_id = env('ALIYUN_MTS_WATERMARK_TEMPLATE_ID', '');
         $this->input_bucket = env('ALIYUN_OSS_BUCKET', 'example-bucket');
         $this->output_bucket = env('ALIYUN_OSS_BUCKET', 'example-bucket');
 
@@ -167,11 +167,17 @@ class MtsService
      * 视频截图
      * 截图作业由输入文件及截图配置构成，得到输入文件按截图配置截取的图片。
      * @param $input_file
+     * @param $output_img
      * @return \SimpleXMLElement[]
      */
-    public function submitSnapshotJob($input_file)
+    public function submitSnapshotJob($input_file , $output_img)
     {
-        $obj = 'demo/snapshots/' . uniqid() . '-中文.jpg';
+        $obj = $output_img;
+        $inputFile = [
+            'Location' => $this->oss_region,
+            'Bucket' => $this->input_bucket,
+            'Object' => urlencode($input_file)
+        ];
         $snapshot_output = array(
             'Location' => $this->oss_region,
             'Bucket' => $this->input_bucket,
@@ -179,12 +185,13 @@ class MtsService
         );
         $snapshot_config = array(
             'OutputFile' => $snapshot_output,
-            'Time' => 1000
+            //截取视频第5秒的图片
+            'Time' => 5000
         );
 
         $request = new Mts\SubmitSnapshotJobRequest();
         $request->setAcceptFormat('JSON');
-        $request->setInput(json_encode($input_file));
+        $request->setInput(json_encode($inputFile));
         $request->setSnapshotConfig(json_encode($snapshot_config));
 
         $response = $this->client->getAcsResponse($request);
