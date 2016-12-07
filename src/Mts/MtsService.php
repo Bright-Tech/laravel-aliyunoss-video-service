@@ -1,7 +1,7 @@
 <?php
 namespace Mts;
 
-include_once '/Core/Config.php';
+include_once 'Core/Config.php';
 use OSS\OssClient;
 use Mts\Request\V20140618 as Mts;
 use Mts\Core as Core;
