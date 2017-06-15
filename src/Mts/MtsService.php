@@ -346,7 +346,7 @@ class MtsService
         $request->setInput(json_encode($inputFile));
         $request->setOutputBucket($this->output_bucket);
         $request->setOutputLocation($this->oss_region);
-        $request->setOUtputs(json_encode($outputs));
+        $request->setOutputs(json_encode($outputs));
         $request->setPipelineId($this->pipeline_id);
 
         $response = $this->client->getAcsResponse($request);
