@@ -18,8 +18,9 @@
  * under the License.
  */
 namespace Mts\Request\V20140618;
+use Mts\Core\RpcAcsRequest;
 
-class SearchMediaRequest extends \RpcAcsRequest
+class SearchMediaRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{
