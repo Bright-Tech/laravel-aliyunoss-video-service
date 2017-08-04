@@ -401,4 +401,25 @@ class MtsService
             $transcode_job->{'Output'}->{'OutputFile'}->{'Location'} . '.aliyuncs.com/' .
             urldecode($transcode_job->{'Output'}->{'OutputFile'}->{'Object'}) . "\n";
     }
+
+     /**
+     * 提交视频信息Job
+     * @param $input_file
+     * @return mixed
+     */
+    public function submitMediaInfoJob($input_file)
+    {
+        $request = new Mts\SubmitMediaInfoJobRequest();
+        $request->setAcceptFormat('JSON');
+        $inputFile = [
+            'Bucket' => $this->input_bucket,
+            'Location' => $this->oss_region,
+            'Object' => $input_file
+        ];
+        $request->setInput(json_encode($inputFile));
+        $request->setUserData('SubmitMediaInfoJob userData');
+        $request->setPipelineId($this->pipeline_id);
+        $response = $this->client->getAcsResponse($request);
+        return $response->{'MediaInfoJob'};
+    }
 }
