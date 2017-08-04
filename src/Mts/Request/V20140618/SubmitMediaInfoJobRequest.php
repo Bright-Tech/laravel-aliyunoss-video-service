@@ -19,7 +19,9 @@
  */
 namespace Mts\Request\V20140618;
 
-class SubmitMediaInfoJobRequest extends \RpcAcsRequest
+use Mts\Core\RpcAcsRequest;
+
+class SubmitMediaInfoJobRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{
