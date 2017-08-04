@@ -19,7 +19,9 @@
  */
 namespace Mts\Request\V20140618;
 
-class SubmitMetaInfoJobRequest extends \RpcAcsRequest
+use Mts\Core\RpcAcsRequest;
+
+class SubmitMetaInfoJobRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{
